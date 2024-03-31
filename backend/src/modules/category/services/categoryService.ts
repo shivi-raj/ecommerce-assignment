@@ -2,7 +2,6 @@ import { Request } from "express";
 import { logger } from '../../../libs/logger';
 import { pagination } from '../../../libs/pagination';
 import { prisma } from '../../../prisma/prismaClient';
-import { Prisma } from "@prisma/client";
 
 export class CategoryService {
 
@@ -43,8 +42,8 @@ export class CategoryService {
                     });
                     logger.info(`Category with ID ${id} updated successfully.`);
                     updatedCategories.push(id);
-                } catch (error) {
-                    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2025') {
+                } catch (error:any) {
+                    if (error.code === 'P2025') {
                         logger.error(`Category with ID ${id} does not exist.`);
                     } else {
                         logger.error(`Error updating category with ID ${id}:`, error);

@@ -4,7 +4,7 @@ import { faker } from '@faker-js/faker';
 
 async function generateUniqueDepartments(count: number) {
     const records = await prisma.category.findMany();
-    const existingCategories = records.map((item) => item?.title);
+    const existingCategories = records.map((item:any) => item?.title);
     const uniqueDepartments = new Set();
     while (uniqueDepartments.size < count) {
         const department = faker.person.firstName();
